@@ -1,17 +1,13 @@
-class Dollar {
-    amount: number;
+abstract class Money {
+    protected amount: number = 0;
 
     constructor(amount: number) {
         this.amount = amount;
     }
 
-    times(multiplier: number): Dollar {
-        return new Dollar(this.amount * multiplier);
-    }
-
-    equals(obj: Dollar): boolean {
+    equals(obj: Money): boolean {
         return this.amount === obj.amount;
     }
 }
 
-export { Dollar }
+export { Money }

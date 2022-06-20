@@ -1,13 +1,13 @@
-import {Dollar} from "#/money";
+import { Dollar } from "#/dollar";
 
-describe('money', (): void => {
+describe('Dollar', (): void => {
     test('乗算のテスト', (): void => {
         const five: Dollar = new Dollar(5);
         const product1: Dollar = five.times(2);
-        expect(product1.amount).toBe(10);
+        expect(product1).toStrictEqual(new Dollar(10));
 
         const product2: Dollar = five.times(3);
-        expect(product2.amount).toBe(15);
+        expect(product2).toStrictEqual(new Dollar(15));
     });
 
     test('等価性のテスト', (): void => {
