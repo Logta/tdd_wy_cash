@@ -1,1 +1,1 @@
-export default (name: string): string => `Hello, ${name}!`;
+export default (name: string): string => `Hello, ${name}!`
