@@ -18,4 +18,9 @@ describe('Dollar', (): void => {
 
     expect(Money.franc(5).equals(Money.dollar(5))).toBe(false)
   })
+
+  test('currencyのテスト', (): void => {
+    expect(Money.dollar(5).getCurrency()).toBe('USD')
+    expect(Money.franc(6).getCurrency()).toBe('CHF')
+  })
 })
