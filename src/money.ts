@@ -1,8 +1,10 @@
-abstract class Money {
+class Money {
   protected amount: number
   protected currency = ''
 
-  abstract times(multiplier: number): Money
+  times(multiplier: number): Money {
+    return new Money(this.amount * multiplier, this.getCurrency())
+  }
 
   constructor(amount: number, currency: string) {
     this.amount = amount
@@ -18,19 +20,15 @@ abstract class Money {
   }
 
   equals(obj: Money): boolean {
-    return this.amount === obj.amount && this.getClassName() === obj.getClassName()
+    return this.amount === obj.amount && this.getCurrency() === obj.getCurrency()
   }
 
   static dollar(amount: number): Money {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { Dollar } = require('#/dollar')
-    return new Dollar(amount, 'USD')
+    return new Money(amount, 'USD')
   }
 
   static franc(amount: number): Money {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { Franc } = require('#/franc')
-    return new Franc(amount, 'CHF')
+    return new Money(amount, 'CHF')
   }
 }
 
