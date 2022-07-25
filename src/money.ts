@@ -1,4 +1,6 @@
-class Money {
+import { Expression } from "#/expression"
+
+class Money implements Expression {
   protected amount: number
   protected currency = ''
 
@@ -21,6 +23,10 @@ class Money {
 
   equals(obj: Money): boolean {
     return this.amount === obj.amount && this.getCurrency() === obj.getCurrency()
+  }
+
+  plus(obj: Money): Expression {
+    return new Money(this.amount + obj.amount, this.currency);
   }
 
   static dollar(amount: number): Money {
