@@ -1,4 +1,5 @@
 import { Expression } from "#/expression"
+import { Sum } from "#/sum"
 
 class Money implements Expression {
   protected amount: number
@@ -17,6 +18,10 @@ class Money implements Expression {
     return this.currency
   }
 
+  getAmount() {
+    return this.amount
+  }
+
   getClassName() {
     return this.constructor.name
   }
@@ -25,8 +30,12 @@ class Money implements Expression {
     return this.amount === obj.amount && this.getCurrency() === obj.getCurrency()
   }
 
-  plus(obj: Money): Expression {
-    return new Money(this.amount + obj.amount, this.currency);
+  plus(addend: Money): Expression {
+    return new Sum(this, addend);
+  }
+
+  reduce(to: String): Money {
+    return this;
   }
 
   static dollar(amount: number): Money {
