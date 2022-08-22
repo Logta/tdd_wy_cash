@@ -1,5 +1,6 @@
-import { Expression } from "#/expression"
-import { Sum } from "#/sum"
+import { Expression } from '#/expression'
+import { Sum } from '#/sum'
+import { Bank } from '#/bank'
 
 class Money implements Expression {
   protected amount: number
@@ -31,11 +32,11 @@ class Money implements Expression {
   }
 
   plus(addend: Money): Expression {
-    return new Sum(this, addend);
+    return new Sum(this, addend)
   }
 
-  reduce(to: String): Money {
-    return this;
+  reduce(bank: Bank, to: string): Money {
+    return new Money(this.amount / bank.rate(this.currency, to), to)
   }
 
   static dollar(amount: number): Money {
