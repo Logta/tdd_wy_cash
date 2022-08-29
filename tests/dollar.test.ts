@@ -5,11 +5,12 @@ import { Sum } from '#/sum'
 
 describe('Dollar', (): void => {
   test('乗算のテスト', (): void => {
+    const bank: Bank = new Bank()
     const five: Money = Money.dollar(5)
-    const product1: Money = five.times(2)
+    const product1: Money = five.times(2).reduce(bank, five.getCurrency())
     expect(product1.equals(Money.dollar(10))).toBe(true)
 
-    const product2: Money = five.times(3)
+    const product2: Money = five.times(3).reduce(bank, five.getCurrency())
     expect(product2.equals(Money.dollar(15))).toBe(true)
   })
 
@@ -63,5 +64,16 @@ describe('Dollar', (): void => {
 
   test('same currency', (): void => {
     expect(1).toBe(new Bank().rate('USD', 'USD'))
+  })
+
+  test('通貨を混ぜた足し算のテスト', (): void => {
+    const fiveBucks: Expression = Money.dollar(5)
+    const tenFrancs: Expression = Money.franc(10)
+
+    const bank: Bank = new Bank()
+    bank.addRate('CHF', 'USD', 2)
+    const result: Money = bank.reduce(fiveBucks.plus(tenFrancs), 'USD')
+
+    expect(result).toStrictEqual(Money.dollar(10))
   })
 })

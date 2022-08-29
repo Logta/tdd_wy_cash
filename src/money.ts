@@ -6,7 +6,7 @@ class Money implements Expression {
   protected amount: number
   protected currency = ''
 
-  times(multiplier: number): Money {
+  times(multiplier: number): Expression {
     return new Money(this.amount * multiplier, this.getCurrency())
   }
 
@@ -31,7 +31,7 @@ class Money implements Expression {
     return this.amount === obj.amount && this.getCurrency() === obj.getCurrency()
   }
 
-  plus(addend: Money): Expression {
+  plus(addend: Expression): Expression {
     return new Sum(this, addend)
   }
 
